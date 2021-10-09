@@ -1,0 +1,129 @@
+Project RelationalMediaExplorer {
+  database_type: 'sqlite'
+
+  Note: '''
+    https://dbdiagram.io/d/61619d8d940c4c4eec8d14d8
+    ・created_at, updated_at, deleted_atは記載を省略するが実際は基本作ると思う
+    ・エクセルにexportする時はdirectories～cellsで1シート、cell_relationsで1シート、laout_settingsで1シートみたいになると思う
+        ・逆に非正規化したテーブルの値の構造もそのような区分けになるのかも
+  '''
+}
+
+//---------------------------------//
+
+Enum CellType {
+  TEXT
+  MARKDOWN
+  IMAGE
+  SOUND
+  VIDEO
+}
+
+//---------------------------------//
+
+Table directories {
+  id string [pk, note:"ulid"]
+  name string
+  sort_order int
+
+  Note: '''
+    ・tableを入れる配列
+  '''
+}
+
+Table tables {
+  id string [pk, note:"ulid"]
+  directory_id string [ref:> directories.id]
+  name string
+  sort_order int
+
+  Note: '''
+    ・columnsを入れる配列
+  '''
+}
+
+Table columns {
+  id string [pk, note:"ulid"]
+  table_id string [ref:> tables.id]
+  name string
+  sort_order int
+
+  Note: '''
+    ・cellsを入れる配列
+  '''
+}
+
+Table cells {
+  id string [pk, note:"ulid"]
+  column_id string [ref:> columns.id]
+  type CellType
+  data json [note:'データ本体']
+
+  Note: '''
+    ・これが各種データ
+  '''
+}
+
+
+Table cell_relations {
+  a_cell_id string [ref:> cells.id]
+  b_cell_id string [ref:> cells.id]
+
+  Note: '''
+    ・セルとセルの関連
+    ・to,from等の方向性は無い
+    ・日時が先のほうがaに入る（同じならどちらでもいい）
+  '''
+}
+
+Table layout_settings {
+  id string [pk, note:"ulid"]
+  column_id string [ref:> tables.id]
+  name string
+
+  Note: '''
+    ・テーブルの表示設定
+  '''
+}
+
+Table indent_columns {
+  id string [pk, note:"ulid"]
+  layout_setting_id string [ref:> layout_settings.id]
+  indent_order int
+  column_id string [ref:> columns.id]
+
+  Note: '''
+    ・メインペインのインデントカラム
+  '''
+}
+
+Table main_columns {
+  id string [pk, note:"ulid"]
+  layout_setting_id string [ref:> layout_settings.id]
+  column_id string [ref:> columns.id]
+
+  Note: '''
+    ・メインペインのメインカラム
+  '''
+}
+
+Table relating_cells_columns {
+  id string [pk, note:"ulid"]
+  layout_setting_id string [ref:> layout_settings.id]
+  column_id string [ref:> columns.id]
+  list_display_setting json [Note:'リスト表示の方向、表示タイプ、セパレータ等']
+
+  Note: '''
+    ・関連セルペインに何カラムのセルをどう表示するか
+  '''
+}
+
+Table application_settings {
+  id string [pk]
+  name string [Note:'保存先ベースディレクトリ等']
+  value string
+
+  Note: '''
+    ・設定ファイル的な立ち位置
+  '''
+}
