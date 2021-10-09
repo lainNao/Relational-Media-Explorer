@@ -1,3 +1,3 @@
-# LaceV1
+# Relational-Media-Explorer
 
 設計と技術検証を十分にやって自分がほしいものを作りたい…
