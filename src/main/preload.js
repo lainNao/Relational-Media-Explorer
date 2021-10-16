@@ -1,23 +1,15 @@
 const { contextBridge, ipcRenderer } = require('electron');
 
-contextBridge.exposeInMainWorld('electron', {
-  ipcRenderer: {
-    myPing() {
-      ipcRenderer.send('ipc-example', 'ping');
-    },
-    on(channel, func) {
-      const validChannels = ['ipc-example'];
-      if (validChannels.includes(channel)) {
-        // Deliberately strip event as it includes `sender`
-        ipcRenderer.on(channel, (event, ...args) => func(...args));
-      }
-    },
-    once(channel, func) {
-      const validChannels = ['ipc-example'];
-      if (validChannels.includes(channel)) {
-        // Deliberately strip event as it includes `sender`
-        ipcRenderer.once(channel, (event, ...args) => func(...args));
-      }
-    },
+contextBridge.exposeInMainWorld('api', {
+  // ユーティリティ
+  on(channel, func) {
+    ipcRenderer.on(channel, (event, ...args) => func(...args));
   },
+  once(channel, func) {
+    ipcRenderer.once(channel, (event, ...args) => func(...args));
+  },
+  // 型をつけてipcで定義した関数を呼ぶだけ。名前は合わせる必要がある
+  pingPongAsync: (args) => ipcRenderer.invoke('pingPongAsync', args),
+  pingPongSync: (args) => args,
+  checkIfInitialized: (args) => ipcRenderer.invoke('checkIfInitialized', args),
 });

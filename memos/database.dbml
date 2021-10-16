@@ -125,5 +125,8 @@ Table application_settings {
 
   Note: '''
     ・設定ファイル的な立ち位置
+
+    initialized: 0か1   //1なら初期化済み
+
   '''
 }
