@@ -9,3 +9,4 @@
   - https://github.com/electron-react-boilerplate/electron-react-boilerplate
 - 起動 `npm start`
 - ビルド `npm run package`
+- sqlite3のリビルド `rebuild:sqlite`

@@ -13,6 +13,7 @@ import 'regenerator-runtime/runtime';
 import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
+import * as sqlite3 from 'sqlite3';
 import log from 'electron-log';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
@@ -30,6 +31,25 @@ let mainWindow: BrowserWindow | null = null;
 ipcMain.on('ipc-example', async (event, arg) => {
   const msgTemplate = (pingPong: string) => `IPC test: ${pingPong}`;
   console.log(msgTemplate(arg));
+  const sqlite = sqlite3.verbose();
+  const db = new sqlite.Database(':memory:');
+  db.serialize(() => {
+    db.run('CREATE TABLE lorem (info TEXT)');
+
+    const stmt = db.prepare('INSERT INTO lorem VALUES (?)');
+    for (let i = 0; i < 10; i += 1) {
+      stmt.run(`Ipsum ${i}`);
+    }
+    stmt.finalize();
+
+    db.each('SELECT rowid AS id, info FROM lorem', (err, row) => {
+      console.log(err);
+      console.log(`${row.id}: ${row.info}`);
+    });
+  });
+
+  db.close();
+
   event.reply('ipc-example', msgTemplate('pong'));
 });
 
