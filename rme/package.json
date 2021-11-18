@@ -1,0 +1,55 @@
+{
+  "🥺基本設定🥺": "",
+  "name": "rme",
+  "version": "0.0.0",
+  "description": "description",
+  "author": "me",
+  "license": "ISC",
+  "main": "main/main.js",
+  "engines": {
+    "node": "16.5.x"
+  },
+
+  "🥺コマンド🥺":"",
+  "scripts": {
+    "ーーーー開発用ーーーー": "",
+    "start": "electron .",
+    "start:localhost": "cross-env NODE_ENV=\"dev:localhost\" electron .",
+
+    "ーーーービルド用ーーーー": "",
+    "build:noinstaller": "electron-builder --dir",
+    "build:installer": "electron-builder",
+    "build:noinstaller:withrendererbuild": "npm run inner:buildrenderer && electron-builder --dir",
+    "build:installer:withrendererbuild": "npm run inner:buildrenderer && electron-builder",
+
+    "ーーーー内部用ーーーー": "",
+    "inner:buildrenderer": "cd renderer && npm run build && cd ../",
+    "preinstall": "npx only-allow yarn"
+  },
+
+  "🥺ビルド設定🥺": "",
+  "build": {
+    "appId": "your.id",
+    "mac": {
+      "category": "your.app.category.type"
+    },
+    "files": [
+      "./renderer/build/**/*",
+      "./main/main.js"
+    ],
+    "extraMetadata": {
+      "main": "main/main.js"
+    }
+  },
+
+  "🥺ライブラリ🥺":"",
+  "dependencies": {
+    "cross-env": "^7.0.3",
+    "sqlite3": "^5.0.2"
+  },
+  "devDependencies": {
+    "electron": "^16.0.0",
+    "electron-builder": "^22.13.1",
+    "electron-rebuild": "^3.2.5"
+  }
+}
