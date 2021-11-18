@@ -1,0 +1,58 @@
+{
+  "🥺基本設定🥺": "",
+  "name": "renderer",
+  "version": "0.0.1",
+  "homepage": ".",
+
+  "🥺コマンド🥺":"",
+  "scripts": {
+    "ーーーー開発用ーーーー": "",
+    "start": "react-scripts start",
+
+    "ーーーーテスト用ーーーー": "",
+    "test": "react-scripts test",
+
+    "ーーーービルド用ーーーー": "",
+    "build": "react-scripts build",
+
+    "ーーーー内部用ーーーー": "",
+    "preinstall": "npx only-allow yarn",
+    "eject": "react-scripts eject"
+  },
+
+  "🥺他設定🥺":"",
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+
+  "🥺ライブラリ🥺":"",
+  "dependencies": {
+    "@reduxjs/toolkit": "^1.5.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-redux": "^7.1.7",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.0",
+    "react-scripts": "4.0.3",
+    "typescript": "~4.1.5"
+  }
+
+}

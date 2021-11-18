@@ -16,7 +16,7 @@ function createWindow () {
   if (process.env.NODE_ENV === "dev:localhost") {
     win.loadURL("http://localhost:3000")
   } else {
-    const indexFilePath = path.join(__dirname, "../renderer/build/index.html")
+    const indexFilePath = path.join(__dirname, "../client/build/index.html")
     win.loadFile(indexFilePath)
   }
 }
