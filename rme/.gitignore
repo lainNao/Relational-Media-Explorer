@@ -1,0 +1,10 @@
+# ライブラリ
+/node_modules
+
+# ビルド成果物
+/dist
+/out_main
+
+# 他
+errors.log
+db.sqlite
