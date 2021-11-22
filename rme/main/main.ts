@@ -1,6 +1,8 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
-import { rmeServer } from "./server";
+if (process.env.NO_SERVER !== "true") {
+  require("./server");
+}
 
 const loadClient = () => {
   // ウィンドウ作成
@@ -12,7 +14,7 @@ const loadClient = () => {
 
   // 「npm run start:localhost」したらlocalhost:3000を開く
   // そうでないならビルドしたファイルを開く
-  if (process.env.IS_LOCALHOST_CLIENT === "true") {
+  if (process.env.NO_CLIENT === "true") {
     win.loadURL("http://localhost:3000");
   } else {
     const indexFilePath = path.join(__dirname, "../client/build/index.html");
@@ -20,23 +22,8 @@ const loadClient = () => {
   }
 };
 
-const loadServer = () => {
-  // サーバースタート
-  const serverPort = 4321;
-  try {
-    rmeServer.listen(serverPort, "localhost", () => {
-      console.log(`server start on http://localhost:${serverPort}`);
-    });
-  } catch (error) {
-    console.error(`can't start server: ${error}`);
-  }
-};
-
 // アプリケーションが起動したら発火
 app.whenReady().then(() => {
-  // サーバーを開く
-  loadServer();
-
   // クライアントを開く
   loadClient();
 

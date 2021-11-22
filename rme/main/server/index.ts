@@ -33,4 +33,16 @@ const getAllUsers = () =>
     });
   });
 
-export const rmeServer = app;
+// サーバースタート
+export const startServer = () => {
+  try {
+    const serverPort = 4321;
+    app.listen(serverPort, "localhost", () => {
+      console.log(`server start on http://localhost:${serverPort}`);
+    });
+  } catch (error) {
+    console.error(`can't start server: ${error}`);
+  }
+}
+
+startServer()

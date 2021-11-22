@@ -7,17 +7,19 @@
   "license": "ISC",
   "🥺コマンド🥺": "",
   "scripts": {
-    "ーーーー開発用ーーーー": "",
-    "start": "          yarn inner:buildmain && electron .",
-    "start:localhost": "yarn inner:buildmain && cross-env IS_LOCALHOST_CLIENT=\"true\" electron .",
+    "startall:withbuild": "               yarn inner:build:main && inner:build:client && electron .",
+    "startall:withhalfbuild:noclient": "  yarn inner:build:main && cross-env NO_CLIENT=true electron .",
+    "startall:withhalfbuild:noserver": "  yarn inner:build:main && cross-env NO_SERVER=true electron .",
+    "startall:withoutbuild:serverclient": "run-p inner:start:*",
+    "startonly:server": "yarn inner:start:server",
     "ーーーービルド用ーーーー": "",
-    "build:installer": "                  yarn inner:buildmain                           && electron-builder",
-    "build:installer:withclientbuild": "  yarn inner:buildmain && yarn inner:buildclient && electron-builder",
-    "build:noinstaller": "                yarn inner:buildmain                           && electron-builder --dir",
-    "build:noinstaller:withclientbuild": "yarn inner:buildmain && yarn inner:buildclient && electron-builder --dir",
+    "build:noinstaller": "yarn inner:build:main && yarn inner:build:client && electron-builder --dir",
+    "build:installer": "  yarn inner:build:main && yarn inner:build:client && electron-builder",
     "ーーーー内部用ーーーー": "",
-    "inner:buildclient": "cd client && yarn build && cd ../",
-    "inner:buildmain": "  tsc ./main/main.ts --outDir out_main"
+    "inner:build:client": "cd client && yarn && yarn build && cd ../",
+    "inner:build:main": "               yarn && tsc ./main/main.ts --outDir out_main",
+    "inner:start:client": "cd client && yarn start",
+    "inner:start:server": "ts-node-dev main/server/index.ts"
   },
   "🥺ビルド設定🥺": "",
   "engines": {
@@ -44,6 +46,7 @@
     "cross-env": "^7.0.3",
     "express": "^4.17.1",
     "log4js": "^6.3.0",
+    "npm-run-all": "^4.1.5",
     "sqlite3": "^5.0.2",
     "typescript": "^4.5.2"
   },
@@ -53,6 +56,7 @@
     "@types/sqlite3": "^3.1.7",
     "electron": "^16.0.0",
     "electron-builder": "^22.13.1",
-    "electron-rebuild": "^3.2.5"
+    "electron-rebuild": "^3.2.5",
+    "ts-node-dev": "^1.1.8"
   }
 }
