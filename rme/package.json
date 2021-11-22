@@ -7,19 +7,19 @@
   "license": "ISC",
   "🥺コマンド🥺": "",
   "scripts": {
-    "startall:withbuild": "               yarn inner:build:main && inner:build:client && electron .",
-    "startall:withhalfbuild:noclient": "  yarn inner:build:main && cross-env NO_CLIENT=true electron .",
-    "startall:withhalfbuild:noserver": "  yarn inner:build:main && cross-env NO_SERVER=true electron .",
-    "startall:withoutbuild:serverclient": "run-p inner:start:*",
-    "startonly:server": "yarn inner:start:server",
+    "start:withbuild": "               yarn inner:build:main && inner:build:client && electron .",
+    "start:halfbuild:noclient": "      yarn inner:build:main && cross-env NO_CLIENT=true electron .",
+    "start:halfbuild:noserver": "      yarn inner:build:main && cross-env NO_SERVER=true electron .",
+    "start:withoutserverclientbuild": "yarn inner:build:main && cross-env NO_SERVER=true NO_CLIENT=true electron . && yarn inner:start:all",
     "ーーーービルド用ーーーー": "",
     "build:noinstaller": "yarn inner:build:main && yarn inner:build:client && electron-builder --dir",
     "build:installer": "  yarn inner:build:main && yarn inner:build:client && electron-builder",
     "ーーーー内部用ーーーー": "",
     "inner:build:client": "cd client && yarn && yarn build && cd ../",
-    "inner:build:main": "               yarn && tsc ./main/main.ts --outDir out_main",
+    "inner:build:main": "  yarn && tsc ./main/main.ts --outDir out_main",
     "inner:start:client": "cd client && yarn start",
-    "inner:start:server": "ts-node-dev main/server/index.ts"
+    "inner:start:server": "ts-node-dev main/server/index.ts",
+    "inner:start:all": "   run-p inner:start:*"
   },
   "🥺ビルド設定🥺": "",
   "engines": {

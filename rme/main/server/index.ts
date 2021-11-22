@@ -43,6 +43,6 @@ export const startServer = () => {
   } catch (error) {
     console.error(`can't start server: ${error}`);
   }
-}
+};
 
-startServer()
+startServer();
