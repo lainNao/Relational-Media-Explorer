@@ -25,9 +25,9 @@
   },
   "main": "out_main/main.js",
   "build": {
-    "appId": "com.electron.rme",
+    "appId": "com.electron.relationalmediaplayer",
     "mac": {
-      "category": "your.app.category.type"
+      "category": "public.app-category.utilities"
     },
     "files": [
       "./out_main/**/*",
