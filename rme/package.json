@@ -30,7 +30,7 @@
   },
   "main": "out_main/main.js",
   "build": {
-    "appId": "com.electron.relationalmediaplayer",
+    "appId": "com.electron.relationalmediaexplorer",
     "mac": {
       "category": "public.app-category.utilities"
     },
