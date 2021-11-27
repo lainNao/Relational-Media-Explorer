@@ -4,7 +4,9 @@
 # ビルド成果物
 /dist
 /out_main
+/main/prisma/generated
 
 # 他
 errors.log
 db.sqlite
+schema.prisma.forpacked

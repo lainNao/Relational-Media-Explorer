@@ -1,8 +1,6 @@
 import { app, BrowserWindow } from "electron";
 import * as path from "path";
-if (process.env.NO_SERVER !== "true") {
-  require("./server");
-}
+import { startServer } from "./server";
 
 const loadClient = () => {
   // ウィンドウ作成
@@ -26,6 +24,11 @@ const loadClient = () => {
 app.whenReady().then(() => {
   // クライアントを開く
   loadClient();
+
+  // サーバーを起動
+  if (process.env.RUN_SERVER_FROM_ELECTRON === "true") {
+    startServer();
+  }
 
   // アクティベートしてもクライアントが開いてない場合はクライアントを開く
   app.on("activate", () => {
