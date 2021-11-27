@@ -7,7 +7,7 @@
   "license": "ISC",
   "🥺コマンド🥺": "",
   "scripts": {
-    "start:withbuild": "               yarn inner:build:main && inner:build:client && electron .",
+    "start:withbuild": "               yarn inner:build:main && yarn inner:build:client && electron .",
     "start:halfbuild:noclient": "      yarn inner:build:main && cross-env NO_CLIENT=true electron .",
     "start:halfbuild:noserver": "      yarn inner:build:main && cross-env NO_SERVER=true electron .",
     "start:withoutserverclientbuild": "yarn inner:build:main && cross-env NO_SERVER=true NO_CLIENT=true electron . && yarn inner:start:all",
