@@ -7,19 +7,22 @@
   "license": "ISC",
   "🥺コマンド🥺": "",
   "scripts": {
-    "start:withbuild": "               yarn inner:build:main && yarn inner:build:client && electron .",
-    "start:halfbuild:noclient": "      yarn inner:build:main && cross-env NO_CLIENT=true electron .",
-    "start:halfbuild:noserver": "      yarn inner:build:main && cross-env NO_SERVER=true electron .",
-    "start:withoutserverclientbuild": "yarn inner:build:main && cross-env NO_SERVER=true NO_CLIENT=true electron . && yarn inner:start:all",
+    "start:withbuild": "               yarn inner:build:main && yarn inner:build:client && cross-env RUN_SERVER_FROM_ELECTRON=true                electron .",
+    "start:halfbuild:noclient": "      yarn inner:build:main &&                            cross-env RUN_SERVER_FROM_ELECTRON=true NO_CLIENT=true electron .",
+    "start:halfbuild:noserver": "      yarn inner:build:main && yarn inner:build:client && cross-env                                              electron .",
+    "start:withoutserverclientbuild": "yarn inner:build:main &&                            cross-env NO_CLIENT=true                               electron . && yarn inner:start:all",
     "ーーーービルド用ーーーー": "",
-    "build:noinstaller": "yarn inner:build:main && yarn inner:build:client && electron-builder --dir",
-    "build:installer": "  yarn inner:build:main && yarn inner:build:client && electron-builder",
+    "build:noinstaller": "yarn inner:build:main:packed && yarn inner:build:client && electron-builder --dir",
+    "build:installer": "  yarn inner:build:main:packed && yarn inner:build:client && electron-builder",
     "ーーーー内部用ーーーー": "",
-    "inner:build:client": "cd client && yarn && yarn build && cd ../",
-    "inner:build:main": "  yarn && tsc ./main/main.ts --outDir out_main",
-    "inner:start:client": "cd client && yarn start",
-    "inner:start:server": "ts-node-dev main/server/index.ts",
-    "inner:start:all": "   run-p inner:start:*"
+    "inner:build:client": "       cd client && yarn && yarn build && cd ../",
+    "inner:build:main": "         yarn && node scripts/del_out_main.js && yarn inner:build:prisma        && tsc ./main/main.ts --outDir out_main && node scripts/cp_prisma_to_out_main.js",
+    "inner:build:main:packed": "  yarn && node scripts/del_out_main.js && yarn inner:build:prisma:packed && tsc ./main/main.ts --outDir out_main && node scripts/cp_prisma_to_out_main.js",
+    "inner:build:prisma": "                                                            npx prisma generate --schema main/prisma/schema.prisma",
+    "inner:build:prisma:packed": "node scripts/generate_prisma_schema_for_packed.js && npx prisma generate --schema main/prisma/schema.prisma.forpacked",
+    "inner:start:client": "       cd client && yarn start",
+    "inner:start:server": "       yarn inner:build:prisma && ts-node-dev main/server/index.ts",
+    "inner:start:all": "          run-p inner:start:*"
   },
   "🥺ビルド設定🥺": "",
   "engines": {
@@ -27,7 +30,7 @@
   },
   "main": "out_main/main.js",
   "build": {
-    "appId": "com.electron.relationalmediaplayer",
+    "appId": "com.electron.relationalmediaexplorer",
     "mac": {
       "category": "public.app-category.utilities"
     },
@@ -41,10 +44,13 @@
   },
   "🥺ライブラリ🥺": "",
   "dependencies": {
+    "@prisma/client": "^3.5.0",
     "@types/cors": "^2.8.12",
     "cors": "^2.8.5",
     "cross-env": "^7.0.3",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
+    "fs-extra": "^10.0.0",
     "log4js": "^6.3.0",
     "npm-run-all": "^4.1.5",
     "sqlite3": "^5.0.2",
@@ -57,6 +63,7 @@
     "electron": "^16.0.0",
     "electron-builder": "^22.13.1",
     "electron-rebuild": "^3.2.5",
+    "prisma": "^3.5.0",
     "ts-node-dev": "^1.1.8"
   }
 }
