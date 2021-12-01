@@ -1,4 +1,4 @@
-name: Publish
+name: Publishする（現状ダミー）
 
 on:
   push:
@@ -7,15 +7,14 @@ on:
 
 jobs:
   publish:
-    # To enable auto publishing to github, update your electron publisher
-    # config in package.json > "build" and remove the conditional below
-    if: ${{ github.repository_owner == 'electron-react-boilerplate' }}
-
     runs-on: ${{ matrix.os }}
-
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [macos-latest, windows-latest, ubuntu-latest]
+    defaults:
+      run:
+        # stepsはデフォはrmeの中で実行する
+        working-directory: ./rme
 
     steps:
       - name: チェックアウト
@@ -25,11 +24,6 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: 16.5.x
-
-      - name: ライブラリインストール
-        run: |
-          cd rme/client
-          yarn
 
       - name: Publish releases（TODO:修正）
         env:

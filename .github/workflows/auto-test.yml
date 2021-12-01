@@ -6,7 +6,6 @@ jobs:
   # クライアントサイドの自動テスト
   client:
     runs-on: ubuntu-latest
-
     defaults:
       run:
         # stepsはデフォはrme/clientの中で実行する
