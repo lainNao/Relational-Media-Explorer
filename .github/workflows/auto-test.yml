@@ -1,4 +1,4 @@
-name: auto-test
+name: 自動テスト
 
 on: [push, pull_request]
 
