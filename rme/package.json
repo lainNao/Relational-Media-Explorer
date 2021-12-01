@@ -10,7 +10,7 @@
     "start:withbuild": "               yarn inner:build:main && yarn inner:build:client && cross-env RUN_SERVER_FROM_ELECTRON=true                electron .",
     "start:halfbuild:noclient": "      yarn inner:build:main &&                            cross-env RUN_SERVER_FROM_ELECTRON=true NO_CLIENT=true electron .",
     "start:halfbuild:noserver": "      yarn inner:build:main && yarn inner:build:client && cross-env                                              electron .",
-    "start:withoutserverclientbuild": "yarn inner:build:main &&                            cross-env NO_CLIENT=true                               electron . && yarn inner:start:all",
+    "start:withoutserverclientbuild": "yarn inner:build:main &&                            cross-env NO_CLIENT=true                               electron . && run-p inner:start:*",
     "ーーーービルド用ーーーー": "",
     "build:noinstaller": "yarn inner:build:main:packed && yarn inner:build:client && electron-builder --dir",
     "build:installer": "  yarn inner:build:main:packed && yarn inner:build:client && electron-builder",
@@ -21,8 +21,7 @@
     "inner:build:prisma": "                                                            npx prisma generate --schema main/prisma/schema.prisma",
     "inner:build:prisma:packed": "node scripts/generate_prisma_schema_for_packed.js && npx prisma generate --schema main/prisma/schema.prisma.forpacked",
     "inner:start:client": "       cd client && yarn start",
-    "inner:start:server": "       yarn inner:build:prisma && ts-node-dev main/server/index.ts",
-    "inner:start:all": "          run-p inner:start:*"
+    "inner:start:server": "       yarn inner:build:prisma && ts-node-dev main/server/index.ts"
   },
   "🥺ビルド設定🥺": "",
   "engines": {
