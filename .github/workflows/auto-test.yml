@@ -1,8 +1,9 @@
-name: test-client
+name: auto-test
 
 on: [push, pull_request]
 
 jobs:
+  # クライアントサイドの自動テスト
   client:
     runs-on: ubuntu-latest
 
@@ -22,16 +23,15 @@ jobs:
 
       - name: ライブラリインストール
         run: |
-          cd rme/client
           yarn
 
       - name: テスト
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          cd rme/client
           yarn test
 
+  # サーバーサイドの自動テスト
   server:
     runs-on: ubuntu-latest
     defaults:
