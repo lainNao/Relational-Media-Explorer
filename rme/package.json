@@ -14,6 +14,8 @@
     "ーーーービルド用ーーーー": "",
     "build:noinstaller": "yarn inner:build:main:packed && yarn inner:build:client && electron-builder --dir",
     "build:installer": "  yarn inner:build:main:packed && yarn inner:build:client && electron-builder",
+    "ーーーーテスト用ーーーー": "",
+    "test": "node -e \"console.log('to be defined')\" ",
     "ーーーー内部用ーーーー": "",
     "inner:build:client": "       cd client && yarn && yarn build && cd ../",
     "inner:build:main": "         yarn && node scripts/del_out_main.js && yarn inner:build:prisma        && tsc ./main/main.ts --outDir out_main && node scripts/cp_prisma_to_out_main.js",

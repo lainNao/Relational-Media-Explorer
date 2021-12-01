@@ -1,0 +1,27 @@
+name: test-client
+
+on: [push, pull_request]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v2
+
+      - name: node.js、npm、yarnのインストール
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.5.x
+
+      - name: ライブラリインストール
+        run: |
+          cd rme/client
+          yarn
+
+      - name: テスト
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          yarn test
