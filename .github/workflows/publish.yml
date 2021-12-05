@@ -1,4 +1,4 @@
-name: Publishする（現状ダミー）
+name: publish(currently dummy)
 
 on:
   push:
