@@ -16,7 +16,7 @@
     "build:installer": "  yarn inner:build:main:packed && yarn inner:build:client && electron-builder",
     "ーーーーテスト用ーーーー": "",
     "test:e2e": "        yarn inner:build:main && yarn inner:build:client && cross-env RUN_SERVER_FROM_ELECTRON=true playwright test",
-    "test:e2e:nobuild": "cross-env RUN_SERVER_FROM_ELECTRON=true playwright test",
+    "test:e2e:nobuild": "                                                    cross-env RUN_SERVER_FROM_ELECTRON=true playwright test",
     "test:onlyserver": " node -e \"console.log('to be defined')\" ",
     "ーーーー内部用ーーーー": "",
     "inner:build:client": "       cd client && yarn && yarn build && cd ../",
