@@ -28,8 +28,8 @@ jobs:
       - name: ビルドできるか
         run: yarn build
 
-  # メインプロセスの自動テスト
-  main:
+  # サーバーサイドの自動テスト
+  server:
     runs-on: ubuntu-latest #OSは最新のubuntu
     defaults:
       run:
@@ -48,7 +48,29 @@ jobs:
         run: yarn
 
       - name: テスト通るか
-        run: yarn test
+        run: yarn test:onlyserver
+
+  # e2eの自動テスト
+  e2e:
+    runs-on: ubuntu-latest #OSは最新のubuntu
+    defaults:
+      run:
+        working-directory: ./rme # stepsはデフォはrmeの中で実行する
+
+    steps:
+      - name: チェックアウト
+        uses: actions/checkout@v2
+
+      - name: node.js、npm、yarnのインストール
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.5.x
+
+      - name: ライブラリインストール
+        run: yarn
+
+      - name: テスト通るか
+        run: yarn test:e2e
 
       - name: ビルドできるか
         run: yarn build:noinstaller

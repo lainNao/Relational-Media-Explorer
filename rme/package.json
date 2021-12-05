@@ -15,7 +15,9 @@
     "build:noinstaller": "yarn inner:build:main:packed && yarn inner:build:client && electron-builder --dir",
     "build:installer": "  yarn inner:build:main:packed && yarn inner:build:client && electron-builder",
     "ーーーーテスト用ーーーー": "",
-    "test": "node -e \"console.log('to be defined')\" ",
+    "test:e2e": "        yarn inner:build:main && yarn inner:build:client && cross-env RUN_SERVER_FROM_ELECTRON=true playwright test",
+    "test:e2e:nobuild": "cross-env RUN_SERVER_FROM_ELECTRON=true playwright test",
+    "test:onlyserver": " node -e \"console.log('to be defined')\" ",
     "ーーーー内部用ーーーー": "",
     "inner:build:client": "       cd client && yarn && yarn build && cd ../",
     "inner:build:main": "         yarn && node scripts/del_out_main.js && yarn inner:build:prisma        && tsc ./main/main.ts --outDir out_main && node scripts/cp_prisma_to_out_main.js",
@@ -58,12 +60,14 @@
     "typescript": "^4.5.2"
   },
   "devDependencies": {
+    "@playwright/test": "^1.17.1",
     "@types/express": "^4.17.13",
     "@types/node": "^16.11.9",
     "@types/sqlite3": "^3.1.7",
     "electron": "^16.0.0",
     "electron-builder": "^22.13.1",
     "electron-rebuild": "^3.2.5",
+    "playwright": "^1.17.1",
     "prisma": "^3.5.0",
     "ts-node-dev": "^1.1.8"
   }
