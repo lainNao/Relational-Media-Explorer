@@ -5,11 +5,10 @@ on: [push, pull_request]
 jobs:
   # クライアントサイドの自動テスト
   client:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #OSは最新のubuntu
     defaults:
       run:
-        # stepsはデフォはrme/clientの中で実行する
-        working-directory: ./rme/client
+        working-directory: ./rme/client # stepsはデフォはrme/clientの中で実行する
 
     steps:
       - name: チェックアウト
@@ -31,11 +30,10 @@ jobs:
 
   # メインプロセスの自動テスト
   main:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #OSは最新のubuntu
     defaults:
       run:
-        # stepsはデフォはrmeの中で実行する
-        working-directory: ./rme
+        working-directory: ./rme # stepsはデフォはrmeの中で実行する
 
     steps:
       - name: チェックアウト
