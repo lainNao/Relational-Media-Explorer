@@ -21,17 +21,16 @@ jobs:
           node-version: 16.5.x
 
       - name: ライブラリインストール
-        run: |
-          yarn
+        run: yarn
 
-      - name: テスト
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          yarn test
+      - name: 自動テスト通るか
+        run: yarn test
 
-  # サーバーサイドの自動テスト
-  server:
+      - name: ビルドできるか
+        run: yarn build
+
+  # メインプロセスの自動テスト
+  main:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -48,11 +47,10 @@ jobs:
           node-version: 16.5.x
 
       - name: ライブラリインストール
-        run: |
-          yarn
+        run: yarn
 
-      - name: テスト
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          yarn test
+      - name: テスト通るか
+        run: yarn test
+
+      - name: ビルドできるか
+        run: yarn build:noinstaller
