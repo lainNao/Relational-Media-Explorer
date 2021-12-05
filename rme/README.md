@@ -10,6 +10,12 @@
 | yarn build:noinstaller | インストーラー不要型実行ファイルを作成 |
 | yarn build:installer   | インストーラー型実行ファイルを作成     |
 
+| 自動テスト用コマンド  | 説明                                                      |
+| --------------------- | --------------------------------------------------------- |
+| yarn test:e2e:nobuild | e2e テスト（tests/playwright 配下）。新規でビルドもする   |
+| yarn test:e2e         | e2e テスト（tests/playwright 配下）。新規でビルドはしない |
+| yarn test:onlyserver  | main/server 以下のサーバーの自動テスト                    |
+
 | 他コマンド                    | 説明 |
 | ----------------------------- | ---- |
 | yarn start:halfbuild:noclient | 略   |
