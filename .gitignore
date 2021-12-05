@@ -1,5 +1,6 @@
 # 全般
 **/node_modules
+yarn-error.log
 
 # 他
 tmp.txt
