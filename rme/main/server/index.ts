@@ -21,7 +21,6 @@ app.get(
     logger.error(1);
     logger.error(2);
     try {
-      // const result = await getAllUsers();
       console.log(1);
       const result = await prisma.user.findMany({
         include: { posts: true },
@@ -36,14 +35,6 @@ app.get(
     }
   }
 );
-
-// const getAllUsers = () =>
-//   new Promise((resolve, reject) => {
-//     db.all("SELECT * FROM users", (err: Error | null, rows: any[]) => {
-//       if (err) return reject(err);
-//       resolve(rows);
-//     });
-//   });
 
 // サーバースタート
 export const startServer = () => {
