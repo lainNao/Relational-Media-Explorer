@@ -1,6 +1,12 @@
 name: auto-test
 
-on: [push, pull_request]
+on:
+  push:
+    paths:
+      - "rme/**"
+  pull_request:
+    paths:
+      - "rme/**"
 
 jobs:
   # クライアントサイドの自動テスト
