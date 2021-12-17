@@ -54,10 +54,13 @@ jobs:
   e2e:
     # OSは最新のwindows
     # TODO 後で増やす
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
     defaults:
       run:
         working-directory: ./rme # stepsはデフォはrmeの中で実行する
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest]
 
     steps:
       - name: チェックアウト
