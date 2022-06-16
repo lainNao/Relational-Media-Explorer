@@ -64,7 +64,7 @@
     "@types/express": "^4.17.13",
     "@types/node": "^16.11.9",
     "@types/sqlite3": "^3.1.7",
-    "electron": "^16.0.0",
+    "electron": "^16.2.6",
     "electron-builder": "^22.13.1",
     "electron-rebuild": "^3.2.5",
     "playwright": "^1.17.1",
